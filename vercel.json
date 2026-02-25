@@ -2,8 +2,9 @@
     "framework": null,
     "buildCommand": null,
     "outputDirectory": ".",
+    "cleanUrls": false,
     "routes": [
         { "handle": "filesystem" },
-        { "src": "^/(?!googlec6d3a2a25b4a0f78\\.html).*", "dest": "/index.html" }
+        { "src": "/(.*)", "dest": "/index.html" }
     ]
 }
