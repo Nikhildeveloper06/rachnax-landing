@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -24,7 +25,6 @@
             --orange: #ff5c35;
             --yellow: #f5c842;
             --teal: #2ecfb2;
-            --purple: #8b5cf6;
         }
         
         * {
@@ -44,21 +44,14 @@
             line-height: 1.6;
             overflow-x: hidden;
         }
-        /* ===== CURSOR (desktop only) ===== */
-        
-        @media (pointer: fine) {
-            body {
-                cursor: none;
-            }
-        }
         /* ===== NAV ===== */
         
         header {
             position: sticky;
             top: 0;
-            z-index: 600;
+            z-index: 100;
             background: rgba(232, 233, 232, 0.9);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border);
         }
         
@@ -109,12 +102,6 @@
             font-size: 13px;
             font-weight: 600;
             text-decoration: none;
-            transition: 0.25s;
-        }
-        
-        .nav-cta:hover {
-            background: var(--yellow);
-            color: #000;
         }
         /* ===== HERO ===== */
         
@@ -126,8 +113,7 @@
         }
         
         .hero-eyebrow {
-            display: inline-flex;
-            gap: 8px;
+            display: inline-block;
             background: rgba(255, 92, 53, 0.12);
             border: 1px solid rgba(255, 92, 53, 0.25);
             color: var(--orange);
@@ -148,11 +134,6 @@
         
         h1 em {
             color: var(--orange);
-        }
-        
-        .stroke {
-            -webkit-text-stroke: 2px var(--orange);
-            color: transparent;
         }
         
         .hero-sub {
@@ -192,7 +173,39 @@
             text-decoration: none;
             color: var(--text);
         }
-        /* ===== TICKER ===== */
+        /* ===== MARQUEE ===== */
+        
+        .mq-wrap {
+            overflow: hidden;
+            padding: 16px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+        }
+        
+        .mq-track {
+            display: flex;
+            gap: 56px;
+            white-space: nowrap;
+            animation: ticker 22s linear infinite;
+        }
+        
+        @keyframes ticker {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+        
+        .mq-item {
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+        }
+        /* ===== STATS ===== */
         
         .ticker-row {
             max-width: 1100px;
@@ -215,12 +228,6 @@
             font-family: "Playfair Display", serif;
             font-size: 48px;
             font-weight: 900;
-        }
-        
-        .ticker-desc {
-            font-size: 13px;
-            color: var(--muted);
-            margin-top: 6px;
         }
         /* ===== FEATURES ===== */
         
@@ -264,17 +271,50 @@
             transform: translateY(-6px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
         }
+        /* ===== HOW ===== */
         
-        .feat-title {
-            font-weight: 700;
-            margin: 10px 0;
+        .how {
+            background: var(--surface);
+            padding: 80px 20px;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
         }
         
-        .feat-desc {
-            font-size: 14px;
-            color: var(--muted);
+        .how-grid {
+            max-width: 1100px;
+            margin: 40px auto 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
         }
-        /* ===== CONTACT ===== */
+        
+        .how-step {
+            background: var(--surface2);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        /* ===== TESTIMONIAL ===== */
+        
+        .testi {
+            max-width: 1100px;
+            margin: auto;
+            padding: 80px 20px;
+        }
+        
+        .testi-grid {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        
+        .testi-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 28px;
+        }
+        /* ===== CONTACT (PRO) ===== */
         
         .contact {
             padding: 80px 20px;
@@ -283,6 +323,27 @@
         .contact-inner {
             max-width: 520px;
             margin: auto;
+        }
+        
+        .role-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .role-lbl {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .role-inp:checked+.role-lbl {
+            border-color: var(--orange);
+            color: var(--orange);
         }
         
         .ff {
@@ -324,6 +385,9 @@
             .feat-grid {
                 grid-template-columns: 1fr 1fr;
             }
+            .how-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
         
         @media (max-width: 768px) {
@@ -336,8 +400,11 @@
             .feat-grid {
                 grid-template-columns: 1fr;
             }
-            .hero {
-                padding-top: 80px;
+            .how-grid {
+                grid-template-columns: 1fr;
+            }
+            .testi-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -349,6 +416,7 @@
             <div class="logo">Rachna<span>X</span></div>
             <div class="nav-pills">
                 <a href="#features">Features</a>
+                <a href="#how">Process</a>
                 <a href="#contact">Join</a>
             </div>
             <a href="#contact" class="nav-cta">Join Waitlist</a>
@@ -357,58 +425,77 @@
 
     <section class="hero">
         <div class="hero-eyebrow">Early Access Now Open</div>
-
-        <h1>
-            India's First <em>Creator</em><br />
-            <span class="stroke">Recognition</span> Platform.
-        </h1>
-
+        <h1>India's First <em>Creator</em><br />Recognition Platform.</h1>
         <p class="hero-sub">
-            Recognition. Earnings. Hiring — purpose-built for India's 10M+ emerging creators.
+            Recognition. Earnings. Hiring — built for India's emerging creators.
         </p>
-
         <div class="hero-actions">
             <a href="#contact" class="btn-fill">Get Early Access</a>
             <a href="#features" class="btn-outline">See Features</a>
         </div>
     </section>
 
+    <div class="mq-wrap">
+        <div class="mq-track">
+            <span class="mq-item">🏆 Design Awards</span>
+            <span class="mq-item">💰 Creator Economy</span>
+            <span class="mq-item">🚀 InstaHire</span>
+            <span class="mq-item">🇮🇳 Bharat First</span>
+            <span class="mq-item">✨ Recognition Engine</span>
+        </div>
+    </div>
+
     <div class="ticker-row">
         <div class="ticker-card">
             <div class="ticker-num">$7B+</div>
-            <div class="ticker-desc">India Design Market</div>
+            <div>India Design Market</div>
         </div>
         <div class="ticker-card">
             <div class="ticker-num">10M+</div>
-            <div class="ticker-desc">Target Creators</div>
+            <div>Target Creators</div>
         </div>
         <div class="ticker-card">
             <div class="ticker-num">0</div>
-            <div class="ticker-desc">India-First Competitors</div>
+            <div>India-First Competitors</div>
         </div>
     </div>
 
     <section class="features" id="features">
         <div class="sec-lbl">Why RachnaX</div>
         <h2>Everything creators need</h2>
-
         <div class="feat-grid">
             <div class="feat-card">
-                <div class="feat-title">🏆 Recognition Engine</div>
-                <p class="feat-desc">
-                    Live design awards ecosystem for emerging creators.
-                </p>
+                <b>🏆 Recognition Engine</b>
+                <p>Live design awards ecosystem.</p>
             </div>
             <div class="feat-card">
-                <div class="feat-title">💰 Creator Earnings</div>
-                <p class="feat-desc">Multiple income streams in one place.</p>
+                <b>💰 Creator Earnings</b>
+                <p>Multiple income streams.</p>
             </div>
             <div class="feat-card">
-                <div class="feat-title">🚀 InstaHire</div>
-                <p class="feat-desc">
-                    Recruiters hire from verified performance data.
-                </p>
+                <b>🚀 InstaHire</b>
+                <p>Hire from verified performance.</p>
             </div>
+        </div>
+    </section>
+
+    <div class="how" id="how">
+        <div class="sec-lbl">The Journey</div>
+        <h2>Creator to career in 4 steps</h2>
+        <div class="how-grid">
+            <div class="how-step">Create Profile</div>
+            <div class="how-step">Enter Competitions</div>
+            <div class="how-step">Earn Revenue</div>
+            <div class="how-step">Get Hired</div>
+        </div>
+    </div>
+
+    <section class="testi">
+        <div class="sec-lbl">Community Love</div>
+        <h2>Creators are excited</h2>
+        <div class="testi-grid">
+            <div class="testi-card">“Finally a platform for Tier 2 creators.”</div>
+            <div class="testi-card">“InstaHire will change hiring.”</div>
         </div>
     </section>
 
@@ -421,6 +508,15 @@
           ">
                 Join the Waitlist
             </h2>
+
+            <div class="role-row">
+                <input type="radio" name="role" id="r1" class="role-inp" checked />
+                <label for="r1" class="role-lbl">🎨 Creator</label>
+                <input type="radio" name="role" id="r2" class="role-inp" />
+                <label for="r2" class="role-lbl">🏢 Recruiter</label>
+                <input type="radio" name="role" id="r3" class="role-inp" />
+                <label for="r3" class="role-lbl">💼 Brand</label>
+            </div>
 
             <form id="contactForm">
                 <input name="name" placeholder="Your name" class="ff" required />
