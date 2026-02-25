@@ -1,0 +1,14 @@
+{
+    "name": "rachnax-landing",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "node server.js",
+        "build": "echo build complete"
+    },
+    "dependencies": {
+        "dotenv": "^16.4.5",
+        "express": "^4.19.2",
+        "@supabase/supabase-js": "^2.45.0"
+    }
+}
