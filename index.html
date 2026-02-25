@@ -4,207 +4,1758 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>RachnaX — India's Creator Recognition Platform</title>
-
     <meta name="description" content="RachnaX is India's first design recognition and creator community platform helping Tier 2/3 creators earn, showcase and get hired." />
+    <meta name="keywords" content="RachnaX, design awards India, creator platform India, hire designers India" />
     <link rel="canonical" href="https://www.rachnax.com" />
-
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="apple-touch-icon" href="/logo.png" />
+    <meta property="og:title" content="RachnaX — India's Creator Recognition Platform" />
+    <meta property="og:description" content="Recognition. Earnings. Hiring. Built for Bharat's creators." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.rachnax.com" />
+    <meta property="og:image" content="https://www.rachnax.com/logo.png" />
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "RachnaX",
+            "url": "https://www.rachnax.com",
+            "logo": "https://www.rachnax.com/logo.png",
+            "description": "India's first design recognition and creator community platform"
+        }
+    </script>
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
 
     <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+         :root {
+            --cream: #f5f0e8;
+            --black: #0a0a0a;
+            --ink: #1a1a1a;
+            --muted: #6b6560;
+            --accent: #c84b31;
+            --gold: #d4a853;
+            --purple: #5b3fd9;
+            --border: rgba(10, 10, 10, 0.12);
+            --card-bg: rgba(255, 255, 255, 0.7);
+        }
+        
         html {
             scroll-behavior: smooth;
         }
         
-        .glow {
-            background: radial-gradient( circle at 50% 0%, rgba(124, 58, 237, 0.15), transparent 60%);
+        body {
+            background-color: var(--cream);
+            color: var(--ink);
+            font-family: "DM Sans", sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: none;
+        }
+        /* Custom cursor */
+        
+        .cursor {
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+            mix-blend-mode: multiply;
         }
         
-        .card-hover {
-            transition: all 0.3s ease;
+        .cursor-ring {
+            width: 36px;
+            height: 36px;
+            border: 1.5px solid var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: left 0.12s ease, top 0.12s ease, width 0.3s ease, height 0.3s ease;
+            mix-blend-mode: multiply;
         }
         
-        .card-hover:hover {
+        .cursor.hover {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .cursor-ring.hover {
+            width: 60px;
+            height: 60px;
+            border-color: var(--purple);
+        }
+        /* Noise texture overlay */
+        
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.4;
+        }
+        /* ── NAVBAR ── */
+        
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 500;
+            background: rgba(245, 240, 232, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            font-family: "Syne", sans-serif;
+            font-weight: 800;
+            font-size: 22px;
+            letter-spacing: -0.5px;
+            color: var(--black);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.4);
+            }
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.25s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--ink);
+        }
+        
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .btn-primary {
+            background: var(--black);
+            color: #fff;
+            font-family: "DM Sans", sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 10px 22px;
+            border-radius: 100px;
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.25s, transform 0.2s;
+            cursor: none;
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent);
+            transform: translateY(-1px);
+        }
+        
+        .btn-primary svg {
+            transition: transform 0.25s;
+        }
+        
+        .btn-primary:hover svg {
+            transform: translateX(3px);
+        }
+        /* ── HERO ── */
+        
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 32px 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(91, 63, 217, 0.08);
+            border: 1px solid rgba(91, 63, 217, 0.2);
+            color: var(--purple);
+            font-size: 12px;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 100px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+        
+        .hero-badge span {
+            width: 6px;
+            height: 6px;
+            background: var(--purple);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+        
+        h1 {
+            font-family: "Syne", sans-serif;
+            font-size: clamp(42px, 5vw, 64px);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -2px;
+            color: var(--black);
+        }
+        
+        h1 .line {
+            display: block;
+            overflow: hidden;
+        }
+        
+        h1 .line-inner {
+            display: block;
+            transform: translateY(100%);
+            animation: slideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        
+        h1 .line:nth-child(2) .line-inner {
+            animation-delay: 0.1s;
+        }
+        
+        h1 .line:nth-child(3) .line-inner {
+            animation-delay: 0.2s;
+        }
+        
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+            }
+        }
+        
+        .accent-word {
+            color: var(--accent);
+            font-style: italic;
+        }
+        
+        .hero-sub {
+            margin-top: 24px;
+            font-size: 17px;
+            color: var(--muted);
+            max-width: 420px;
+            line-height: 1.7;
+            opacity: 0;
+            animation: fadeIn 0.8s 0.5s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .hero-ctas {
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            opacity: 0;
+            animation: fadeIn 0.8s 0.7s ease forwards;
+        }
+        
+        .btn-ghost {
+            font-size: 14px;
+            color: var(--ink);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+            padding: 10px 0;
+            transition: gap 0.2s;
+            cursor: none;
+        }
+        
+        .btn-ghost:hover {
+            gap: 10px;
+        }
+        /* Hero visual */
+        
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            animation: fadeIn 1s 0.4s ease forwards;
+        }
+        
+        .hero-card-stack {
+            position: relative;
+            width: 340px;
+            height: 380px;
+        }
+        
+        .hcard {
+            position: absolute;
+            width: 280px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+        }
+        
+        .hcard-1 {
+            top: 20px;
+            left: 0;
+            transform: rotate(-4deg);
+            z-index: 1;
+            animation: float1 6s ease-in-out infinite;
+        }
+        
+        .hcard-2 {
+            top: 50px;
+            right: 0;
+            z-index: 3;
+            animation: float2 5s ease-in-out infinite;
+        }
+        
+        .hcard-3 {
+            bottom: 0;
+            left: 20px;
+            transform: rotate(2deg);
+            z-index: 2;
+            animation: float3 7s ease-in-out infinite;
+        }
+        
+        @keyframes float1 {
+            0%,
+            100% {
+                transform: rotate(-4deg) translateY(0);
+            }
+            50% {
+                transform: rotate(-4deg) translateY(-10px);
+            }
+        }
+        
+        @keyframes float2 {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+        
+        @keyframes float3 {
+            0%,
+            100% {
+                transform: rotate(2deg) translateY(0);
+            }
+            50% {
+                transform: rotate(2deg) translateY(-8px);
+            }
+        }
+        
+        .hcard-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #c84b31, #d4a853);
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .hcard-name {
+            font-family: "Syne", sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        
+        .hcard-role {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+        
+        .hcard-tag {
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 100px;
+            letter-spacing: 0.3px;
+        }
+        
+        .tag-gold {
+            background: rgba(212, 168, 83, 0.15);
+            color: #a07820;
+        }
+        
+        .tag-red {
+            background: rgba(200, 75, 49, 0.12);
+            color: var(--accent);
+        }
+        
+        .tag-purple {
+            background: rgba(91, 63, 217, 0.12);
+            color: var(--purple);
+        }
+        
+        .hcard-stars {
+            color: var(--gold);
+            font-size: 14px;
+            margin-top: 8px;
+            letter-spacing: 2px;
+        }
+        
+        .hcard-earnings {
+            font-family: "Syne", sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--black);
+            margin-top: 8px;
+        }
+        
+        .hcard-label {
+            font-size: 11px;
+            color: var(--muted);
+        }
+        
+        .hcard-bar {
+            height: 6px;
+            background: #eee;
+            border-radius: 100px;
+            margin-top: 12px;
+            overflow: hidden;
+        }
+        
+        .hcard-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--purple), var(--accent));
+            border-radius: 100px;
+            width: 72%;
+            animation: growBar 2s 1s ease forwards;
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+        
+        @keyframes growBar {
+            to {
+                transform: scaleX(1);
+            }
+        }
+        /* ── MARQUEE ── */
+        
+        .marquee-section {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 18px 0;
+            overflow: hidden;
+            background: var(--black);
+        }
+        
+        .marquee-track {
+            display: flex;
+            gap: 64px;
+            white-space: nowrap;
+            animation: marquee 20s linear infinite;
+            width: max-content;
+        }
+        
+        @keyframes marquee {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+        
+        .marquee-item {
+            font-family: "Syne", sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .marquee-item .dot {
+            width: 5px;
+            height: 5px;
+            background: var(--accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        /* ── STATS ── */
+        
+        .stats-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 32px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            background: var(--border);
+            margin-top: 60px;
+        }
+        
+        .stat-box {
+            background: var(--cream);
+            padding: 48px 40px;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s;
+        }
+        
+        .stat-box:hover {
+            background: #fff;
+        }
+        
+        .stat-box::before {
+            content: "";
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient( circle, rgba(91, 63, 217, 0.1) 0%, transparent 70%);
+            transition: transform 0.4s ease;
+        }
+        
+        .stat-box:hover::before {
+            transform: scale(2);
+        }
+        
+        .stat-num {
+            font-family: "Syne", sans-serif;
+            font-size: 52px;
+            font-weight: 800;
+            color: var(--black);
+            letter-spacing: -2px;
+            line-height: 1;
+        }
+        
+        .stat-num .counter {
+            display: inline-block;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--muted);
+            margin-top: 8px;
+            font-weight: 400;
+        }
+        
+        .stat-tag {
+            display: inline-block;
+            margin-top: 16px;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 100px;
+            background: rgba(91, 63, 217, 0.1);
+            color: var(--purple);
+        }
+        /* ── FEATURES ── */
+        
+        .features-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 32px;
+        }
+        
+        .section-eyebrow {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+        
+        h2 {
+            font-family: "Syne", sans-serif;
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            color: var(--black);
+            line-height: 1.1;
+        }
+        
+        .features-grid {
+            margin-top: 64px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        
+        .feat-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 36px 32px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feat-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
         }
         
-        .glass {
-            backdrop-filter: blur(12px);
-            background: rgba(232, 233, 232, 0.7);
+        .feat-card::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--purple), var(--accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .feat-card:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .feat-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .feat-icon-1 {
+            background: rgba(212, 168, 83, 0.15);
+        }
+        
+        .feat-icon-2 {
+            background: rgba(200, 75, 49, 0.1);
+        }
+        
+        .feat-icon-3 {
+            background: rgba(91, 63, 217, 0.1);
+        }
+        
+        .feat-title {
+            font-family: "Syne", sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .feat-desc {
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.65;
+        }
+        
+        .feat-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--purple);
+            text-decoration: none;
+            transition: gap 0.2s;
+            cursor: none;
+        }
+        
+        .feat-link:hover {
+            gap: 10px;
+        }
+        /* ── HOW IT WORKS ── */
+        
+        .how-section {
+            background: var(--black);
+            padding: 100px 32px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .how-section::before {
+            content: "RACHNAX";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: "Syne", sans-serif;
+            font-size: 200px;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.03);
+            white-space: nowrap;
+            pointer-events: none;
+        }
+        
+        .how-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .how-section h2 {
+            color: #fff;
+        }
+        
+        .how-section .section-eyebrow {
+            color: var(--gold);
+        }
+        
+        .how-steps {
+            margin-top: 64px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .how-step {
+            padding: 40px 32px;
+            background: rgba(255, 255, 255, 0.03);
+            transition: background 0.3s;
+            position: relative;
+        }
+        
+        .how-step:hover {
+            background: rgba(255, 255, 255, 0.07);
+        }
+        
+        .how-num {
+            font-family: "Syne", sans-serif;
+            font-size: 60px;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.06);
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+        
+        .how-step-title {
+            font-family: "Syne", sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        
+        .how-step-desc {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.45);
+            line-height: 1.65;
+        }
+        
+        .how-step-icon {
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+        /* ── TESTIMONIALS ── */
+        
+        .testimonials {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 32px;
+        }
+        
+        .testi-grid {
+            margin-top: 64px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        
+        .testi-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 36px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .testi-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.07);
+        }
+        
+        .testi-quote {
+            font-size: 16px;
+            line-height: 1.75;
+            color: var(--ink);
+            margin-bottom: 24px;
+        }
+        
+        .testi-quote::before {
+            content: '"';
+            font-family: "Syne", sans-serif;
+            font-size: 48px;
+            color: var(--accent);
+            line-height: 0;
+            vertical-align: -20px;
+            margin-right: 4px;
+        }
+        
+        .testi-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        
+        .testi-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .testi-name {
+            font-family: "Syne", sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        
+        .testi-loc {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+        /* ── CONTACT ── */
+        
+        .contact-section {
+            background: linear-gradient(135deg, var(--black) 0%, #1a0a3a 100%);
+            padding: 100px 32px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-section::before {
+            content: "";
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient( circle, rgba(91, 63, 217, 0.3) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .contact-section::after {
+            content: "";
+            position: absolute;
+            bottom: -200px;
+            left: -200px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient( circle, rgba(200, 75, 49, 0.2) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .contact-inner {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .contact-section h2 {
+            color: #fff;
+            text-align: center;
+        }
+        
+        .contact-section .section-eyebrow {
+            text-align: center;
+        }
+        
+        .contact-sub {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 16px;
+            margin: 16px 0 48px;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        
+        .field-wrap {
+            position: relative;
+        }
+        
+        .field-label {
+            position: absolute;
+            top: 16px;
+            left: 18px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.4);
+            pointer-events: none;
+            transition: all 0.2s ease;
+        }
+        
+        .form-field {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 28px 18px 14px;
+            color: #fff;
+            font-family: "DM Sans", sans-serif;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.25s, background 0.25s;
+            resize: none;
+        }
+        
+        .form-field::placeholder {
+            color: transparent;
+        }
+        
+        .form-field:focus {
+            border-color: rgba(91, 63, 217, 0.6);
+            background: rgba(255, 255, 255, 0.09);
+        }
+        
+        .form-field:focus~.field-label,
+        .form-field:not(:placeholder-shown)~.field-label {
+            top: 10px;
+            font-size: 11px;
+            color: var(--purple);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .role-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+        
+        .role-option {
+            display: none;
+        }
+        
+        .role-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 16px 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            cursor: none;
+            transition: all 0.2s;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 500;
+        }
+        
+        .role-label:hover {
+            background: rgba(255, 255, 255, 0.09);
+        }
+        
+        .role-label .role-icon {
+            font-size: 22px;
+        }
+        
+        .role-option:checked+.role-label {
+            background: rgba(91, 63, 217, 0.2);
+            border-color: var(--purple);
+            color: #fff;
+        }
+        
+        .role-title {
+            font-family: "Syne", sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background: var(--purple);
+            color: #fff;
+            font-family: "Syne", sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 18px 32px;
+            border-radius: 14px;
+            border: none;
+            cursor: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.3px;
+        }
+        
+        .submit-btn::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient( 135deg, rgba(255, 255, 255, 0.1), transparent);
+        }
+        
+        .submit-btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 16px 40px rgba(200, 75, 49, 0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .submit-btn.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        
+        #successMsg {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background: rgba(100, 220, 100, 0.1);
+            border: 1px solid rgba(100, 220, 100, 0.2);
+            border-radius: 14px;
+            color: #5cd85c;
+            font-size: 15px;
+            font-weight: 500;
+            margin-top: 16px;
+        }
+        /* ── FOOTER ── */
+        
+        footer {
+            background: var(--black);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 40px 32px;
+        }
+        
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .footer-logo {
+            font-family: "Syne", sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: #fff;
+        }
+        
+        .footer-copy {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .footer-links a {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            transition: color 0.2s;
+            cursor: none;
+        }
+        
+        .footer-links a:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        /* ── SCROLL REVEAL ── */
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Responsive */
+        
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-sub {
+                margin: 24px auto 0;
+            }
+            .hero-ctas {
+                justify-content: center;
+            }
+            .hero-visual {
+                display: none;
+            }
+            .stats-section {
+                grid-template-columns: 1fr;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .how-steps {
+                grid-template-columns: 1fr 1fr;
+            }
+            .testi-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            nav {
+                padding: 0 20px;
+            }
+            .nav-links {
+                display: none;
+            }
         }
     </style>
 </head>
 
-<body class="bg-[#e8e9e8] text-black antialiased">
-    <!-- NAVBAR -->
-    <header class="glass sticky top-0 z-50 border-b border-gray-300">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <img src="/logo.png" alt="RachnaX logo" class="h-8 w-auto" />
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
 
-            <a href="#contact" class="bg-black text-white px-5 py-2 rounded-xl font-semibold hover:scale-105 transition">
+    <!-- ── NAVBAR ── -->
+    <header>
+        <nav>
+            <div class="logo">
+                <span class="logo-dot"></span> RachnaX
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how">How it works</a>
+                <a href="#contact">Community</a>
+            </div>
+            <a href="#contact" class="btn-primary">
           Join Waitlist
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
         </a>
-        </div>
+        </nav>
     </header>
 
-    <!-- HERO -->
-    <section class="relative glow">
-        <div class="max-w-7xl mx-auto px-6 py-28 text-center">
-            <h1 class="text-5xl md:text-6xl font-bold leading-tight">
-                India's First<br />
-                <span class="text-purple-700">Creator Recognition Platform</span>
+    <!-- ── HERO ── -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge"><span></span> Now Open for Early Access</div>
+            <h1>
+                <span class="line"><span class="line-inner">India's First</span></span>
+                <span class="line"><span class="line-inner accent-word">Creator</span></span>
+                <span class="line"><span class="line-inner">Recognition Platform.</span></span>
             </h1>
-
-            <p class="mt-6 text-gray-700 max-w-2xl mx-auto text-lg">
-                Recognition. Earnings. Hiring — built for India's 10M+ emerging creators.
+            <p class="hero-sub">
+                Recognition. Earnings. Hiring — built for India's 10M+ emerging creators in Tier 2 &amp; 3 cities.
             </p>
-
-            <div class="mt-10 flex justify-center gap-4">
-                <a href="#contact" class="bg-purple-600 text-white px-8 py-4 rounded-2xl font-semibold hover:bg-purple-700 transition shadow-lg">
+            <div class="hero-ctas">
+                <a href="#contact" class="btn-primary" style="
+              background: var(--purple);
+              font-size: 15px;
+              padding: 14px 28px;
+            ">
             Get Early Access
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+                <a href="#features" class="btn-ghost">
+            See how it works
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
           </a>
             </div>
         </div>
-    </section>
 
-    <!-- STATS -->
-    <section class="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-3 gap-8 text-center">
-        <div class="card-hover p-8 bg-white border border-gray-200 rounded-2xl">
-            <h3 class="text-4xl font-bold counter" data-target="7">0</h3>
-            <p class="text-gray-600 mt-2">Billion+ Market</p>
-        </div>
-
-        <div class="card-hover p-8 bg-white border border-gray-200 rounded-2xl">
-            <h3 class="text-4xl font-bold counter" data-target="10">0</h3>
-            <p class="text-gray-600 mt-2">Million+ Creators</p>
-        </div>
-
-        <div class="card-hover p-8 bg-white border border-gray-200 rounded-2xl">
-            <h3 class="text-4xl font-bold">0</h3>
-            <p class="text-gray-600 mt-2">India-First Competitors</p>
-        </div>
-    </section>
-
-    <!-- FEATURES -->
-    <section class="max-w-7xl mx-auto px-6 py-24">
-        <h2 class="text-4xl font-bold text-center mb-16">Why RachnaX Wins</h2>
-
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="card-hover p-8 bg-white border border-gray-200 rounded-2xl">
-                <h3 class="text-xl font-semibold mb-3">🏆 Recognition Engine</h3>
-                <p class="text-gray-600">
-                    India's first live design awards ecosystem for emerging creators.
-                </p>
+        <div class="hero-visual">
+            <div class="hero-card-stack">
+                <div class="hcard hcard-1">
+                    <div class="hcard-avatar"></div>
+                    <div class="hcard-name">Priya Sharma</div>
+                    <div class="hcard-role">UI Designer · Indore</div>
+                    <div class="hcard-stars">★★★★★</div>
+                    <span class="hcard-tag tag-gold">🏆 Top Creator</span>
+                </div>
+                <div class="hcard hcard-2">
+                    <div class="hcard-label">This month's earnings</div>
+                    <div class="hcard-earnings">₹24,500</div>
+                    <div class="hcard-bar">
+                        <div class="hcard-bar-fill"></div>
+                    </div>
+                    <div style="
+                display: flex;
+                justify-content: space-between;
+                margin-top: 8px;
+              ">
+                        <span style="font-size: 11px; color: var(--muted)">Target ₹34K</span
+              >
+              <span class="hcard-tag tag-purple" style="margin-top: 0"
+                >72%</span
+              >
             </div>
-
-            <div class="card-hover p-8 bg-white border border-gray-200 rounded-2xl">
-                <h3 class="text-xl font-semibold mb-3">💰 Creator Earnings</h3>
-                <p class="text-gray-600">
-                    Vote revenue, prizes, and marketplace income streams.
-                </p>
+          </div>
+          <div class="hcard hcard-3">
+            <div
+              style="font-size: 12px; color: var(--muted); margin-bottom: 8px"
+            >
+              New offer received
             </div>
-
-            <div class="card-hover p-8 bg-white border border-gray-200 rounded-2xl">
-                <h3 class="text-xl font-semibold mb-3">🚀 InstaHire</h3>
-                <p class="text-gray-600">
-                    Recruiters hire directly from verified performance data.
-                </p>
+            <div class="hcard-name">Razorpay is hiring</div>
+            <div class="hcard-role">Product Designer · ₹18L–22L</div>
+            <div style="margin-top: 12px; display: flex; gap: 8px">
+              <span class="hcard-tag tag-red">🚀 InstaHire</span>
+                        <span class="hcard-tag tag-purple">Mumbai</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="max-w-xl mx-auto px-6 py-24">
-        <div class="bg-white border border-gray-200 rounded-3xl p-10 shadow-sm">
-            <h2 class="text-3xl font-bold text-center mb-8">Join the Waitlist</h2>
+    <!-- ── MARQUEE ── -->
+    <div class="marquee-section">
+        <div class="marquee-track">
+            <span class="marquee-item"><span class="dot"></span> Design Awards</span>
+            <span class="marquee-item"><span class="dot"></span> Creator Economy</span>
+            <span class="marquee-item"><span class="dot"></span> Bharat First</span>
+            <span class="marquee-item"><span class="dot"></span> InstaHire</span>
+            <span class="marquee-item"><span class="dot"></span> Vote Revenue</span>
+            <span class="marquee-item"><span class="dot"></span> Tier 2 & 3 Cities</span>
+            <span class="marquee-item"><span class="dot"></span> Recognition Engine</span>
+            <span class="marquee-item"><span class="dot"></span> Creator Marketplace</span>
+            <!-- duplicate for seamless loop -->
+            <span class="marquee-item"><span class="dot"></span> Design Awards</span>
+            <span class="marquee-item"><span class="dot"></span> Creator Economy</span>
+            <span class="marquee-item"><span class="dot"></span> Bharat First</span>
+            <span class="marquee-item"><span class="dot"></span> InstaHire</span>
+            <span class="marquee-item"><span class="dot"></span> Vote Revenue</span>
+            <span class="marquee-item"><span class="dot"></span> Tier 2 & 3 Cities</span>
+            <span class="marquee-item"><span class="dot"></span> Recognition Engine</span>
+            <span class="marquee-item"><span class="dot"></span> Creator Marketplace</span>
+        </div>
+    </div>
 
-            <form id="contactForm" class="space-y-4">
-                <input name="name" placeholder="Your name" class="w-full p-4 rounded-xl bg-gray-50 border border-gray-300 focus:border-purple-500 outline-none" required />
+    <!-- ── STATS ── -->
+    <div style="max-width: 1200px; margin: 80px auto 0; padding: 0 32px">
+        <div class="stats-section reveal">
+            <div class="stat-box">
+                <div class="stat-num">
+                    $<span class="counter" data-target="7">0</span>B+
+                </div>
+                <div class="stat-label">India Design Market</div>
+                <span class="stat-tag">Growing 18% YoY</span>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num">
+                    <span class="counter" data-target="10">0</span>M+
+                </div>
+                <div class="stat-label">Target Creators</div>
+                <span class="stat-tag">Tier 2 & 3 Cities</span>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num">
+                    <span class="counter" data-target="0">0</span>
+                </div>
+                <div class="stat-label">India-First Competitors</div>
+                <span class="stat-tag">Blue Ocean Market</span>
+            </div>
+        </div>
+    </div>
 
-                <input name="email" type="email" placeholder="Email" class="w-full p-4 rounded-xl bg-gray-50 border border-gray-300 focus:border-purple-500 outline-none" required />
+    <!-- ── FEATURES ── -->
+    <section class="features-section" id="features">
+        <div class="reveal">
+            <div class="section-eyebrow">Why RachnaX</div>
+            <h2>Everything a creator<br />needs to grow.</h2>
+        </div>
+        <div class="features-grid">
+            <div class="feat-card reveal" style="transition-delay: 0.1s">
+                <div class="feat-icon feat-icon-1">🏆</div>
+                <div class="feat-title">Recognition Engine</div>
+                <p class="feat-desc">
+                    India's first live design awards ecosystem. Monthly competitions with real prizes, jury reviews, and a verified credential system that actually matters to employers.
+                </p>
+                <a href="#contact" class="feat-link">Learn more
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" /></svg
+          ></a>
+            </div>
+            <div class="feat-card reveal" style="transition-delay: 0.2s">
+                <div class="feat-icon feat-icon-2">💰</div>
+                <div class="feat-title">Creator Earnings</div>
+                <p class="feat-desc">
+                    Multiple income streams in one place — vote revenue share, competition prizes, and a creator marketplace where skills meet opportunity.
+                </p>
+                <a href="#contact" class="feat-link">Learn more
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" /></svg
+          ></a>
+            </div>
+            <div class="feat-card reveal" style="transition-delay: 0.3s">
+                <div class="feat-icon feat-icon-3">🚀</div>
+                <div class="feat-title">InstaHire</div>
+                <p class="feat-desc">
+                    Recruiters hire directly from verified performance data — no resumes needed. Your competition results, community ratings, and portfolio speak for you.
+                </p>
+                <a href="#contact" class="feat-link">Learn more
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" /></svg
+          ></a>
+            </div>
+        </div>
+    </section>
 
-                <textarea name="message" placeholder="Message" class="w-full p-4 rounded-xl bg-gray-50 border border-gray-300 focus:border-purple-500 outline-none"></textarea>
+    <!-- ── HOW IT WORKS ── -->
+    <section class="how-section" id="how">
+        <div class="how-inner">
+            <div class="reveal">
+                <div class="section-eyebrow">The Journey</div>
+                <h2>From creator to<br />career in 4 steps.</h2>
+            </div>
+            <div class="how-steps reveal">
+                <div class="how-step">
+                    <div class="how-num">01</div>
+                    <div class="how-step-icon">✍️</div>
+                    <div class="how-step-title">Create Profile</div>
+                    <p class="how-step-desc">
+                        Build your verified creator profile. Showcase your work, style, and skills in minutes.
+                    </p>
+                </div>
+                <div class="how-step">
+                    <div class="how-num">02</div>
+                    <div class="how-step-icon">🎯</div>
+                    <div class="how-step-title">Enter Competitions</div>
+                    <p class="how-step-desc">
+                        Compete in monthly design challenges. Win prizes. Earn votes. Get recognized.
+                    </p>
+                </div>
+                <div class="how-step">
+                    <div class="how-num">03</div>
+                    <div class="how-step-icon">💸</div>
+                    <div class="how-step-title">Earn Revenue</div>
+                    <p class="how-step-desc">
+                        Monetize through vote revenue, prizes, and the creator marketplace.
+                    </p>
+                </div>
+                <div class="how-step">
+                    <div class="how-num">04</div>
+                    <div class="how-step-icon">🏢</div>
+                    <div class="how-step-title">Get Hired</div>
+                    <p class="how-step-desc">
+                        Top companies headhunt directly from your verified performance data via InstaHire.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <button id="submitBtn" class="w-full bg-purple-600 text-white py-4 rounded-xl font-semibold hover:bg-purple-700 transition">
-            Submit
+    <!-- ── TESTIMONIALS ── -->
+    <section class="testimonials">
+        <div class="reveal" style="text-align: center">
+            <div class="section-eyebrow">Community Love</div>
+            <h2>Creators are already excited.</h2>
+        </div>
+        <div class="testi-grid reveal">
+            <div class="testi-card">
+                <p class="testi-quote">
+                    Finally a platform that understands us — the ones designing from Tier 2 cities without the big-city connections. This changes everything.
+                </p>
+                <div class="testi-author">
+                    <div class="testi-avatar" style="background: rgba(200, 75, 49, 0.1)">
+                        🎨
+                    </div>
+                    <div>
+                        <div class="testi-name">Arjun Mehta</div>
+                        <div class="testi-loc">Graphic Designer · Bhopal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <p class="testi-quote">
+                    I've been waiting for something like InstaHire. My portfolio speaks louder than any resume ever could. Can't wait for launch!
+                </p>
+                <div class="testi-author">
+                    <div class="testi-avatar" style="background: rgba(91, 63, 217, 0.1)">
+                        ✨
+                    </div>
+                    <div>
+                        <div class="testi-name">Sneha Patel</div>
+                        <div class="testi-loc">UI/UX Designer · Surat</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CONTACT ── -->
+    <section class="contact-section" id="contact">
+        <div class="contact-inner">
+            <div class="reveal">
+                <div class="section-eyebrow">Early Access</div>
+                <h2>Be the first to<br />shape RachnaX.</h2>
+                <p class="contact-sub">
+                    Join 2,400+ creators on the waitlist. Help us build the platform that Bharat deserves.
+                </p>
+            </div>
+
+            <div class="reveal">
+                <div class="role-title">I am a ...</div>
+                <div class="role-selector">
+                    <input type="radio" name="role" id="role-creator" class="role-option" value="creator" checked />
+                    <label for="role-creator" class="role-label">
+              <span class="role-icon">🎨</span>
+              Creator
+            </label>
+                    <input type="radio" name="role" id="role-recruiter" class="role-option" value="recruiter" />
+                    <label for="role-recruiter" class="role-label">
+              <span class="role-icon">🏢</span>
+              Recruiter
+            </label>
+                    <input type="radio" name="role" id="role-brand" class="role-option" value="brand" />
+                    <label for="role-brand" class="role-label">
+              <span class="role-icon">💼</span>
+              Brand
+            </label>
+                </div>
+            </div>
+
+            <form id="contactForm" class="reveal" novalidate>
+                <div class="form-row">
+                    <div class="field-wrap">
+                        <input name="name" type="text" class="form-field" id="field-name" placeholder="Name" required autocomplete="name" />
+                        <label class="field-label" for="field-name">Your name</label>
+                    </div>
+                    <div class="field-wrap">
+                        <input name="email" type="email" class="form-field" id="field-email" placeholder="Email" required autocomplete="email" />
+                        <label class="field-label" for="field-email">Email address</label>
+                    </div>
+                </div>
+
+                <div class="field-wrap">
+                    <input name="city" type="text" class="form-field" id="field-city" placeholder="City" />
+                    <label class="field-label" for="field-city">Your city</label>
+                </div>
+
+                <div class="field-wrap">
+                    <textarea name="message" class="form-field" id="field-message" rows="3" placeholder="Message" style="min-height: 100px"></textarea>
+                    <label class="field-label" for="field-message">Anything you want to tell us? (optional)</label
+            >
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <span id="btnText">Secure My Spot</span>
+            <svg
+              id="btnArrow"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
           </button>
-            </form>
+        </form>
 
-            <p id="successMsg" class="hidden text-green-600 mt-4 text-center font-medium">
-                ✅ Submitted successfully
-            </p>
+        <div id="successMsg">
+          🎉 You're on the list! We'll reach out as soon as RachnaX launches.
+          Watch this space.
         </div>
+      </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="text-center py-10 text-gray-600">
-        © 2025 RachnaX. Built for Bharat's Creators.
+    <!-- ── FOOTER ── -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-logo">
+          RachnaX <span style="color: var(--accent)">·</span>
+        </div>
+        <div class="footer-copy">© 2025 RachnaX. Built for Bharat.</div>
+        <div class="footer-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="mailto:hello@rachnax.com">Contact</a>
+        </div>
+      </div>
     </footer>
 
-    <script src="/script.js"></script>
-
     <script>
-        // ===== Animated Counters =====
-        const counters = document.querySelectorAll(".counter");
+      // ── Cursor ──
+      const cursor = document.getElementById("cursor");
+      const ring = document.getElementById("cursorRing");
+      let mx = 0,
+        my = 0,
+        rx = 0,
+        ry = 0;
 
-        counters.forEach((counter) => {
-            const target = +counter.getAttribute("data-target");
-            let count = 0;
+      document.addEventListener("mousemove", (e) => {
+        mx = e.clientX;
+        my = e.clientY;
+        cursor.style.left = mx + "px";
+        cursor.style.top = my + "px";
+      });
 
-            const update = () => {
-                const increment = target / 60;
-                count += increment;
+      function lerp(a, b, t) {
+        return a + (b - a) * t;
+      }
+      function animRing() {
+        rx = lerp(rx, mx, 0.15);
+        ry = lerp(ry, my, 0.15);
+        ring.style.left = rx + "px";
+        ring.style.top = ry + "px";
+        requestAnimationFrame(animRing);
+      }
+      animRing();
 
-                if (count < target) {
-                    counter.innerText = Math.ceil(count);
-                    requestAnimationFrame(update);
-                } else {
-                    counter.innerText = target + "+";
-                }
-            };
-
-            update();
+      document
+        .querySelectorAll("a, button, label, input[type=radio]")
+        .forEach((el) => {
+          el.addEventListener("mouseenter", () => {
+            cursor.classList.add("hover");
+            ring.classList.add("hover");
+          });
+          el.addEventListener("mouseleave", () => {
+            cursor.classList.remove("hover");
+            ring.classList.remove("hover");
+          });
         });
 
-        // ===== Form UX =====
-        const form = document.getElementById("contactForm");
-        const btn = document.getElementById("submitBtn");
-        const successMsg = document.getElementById("successMsg");
-
-        form.addEventListener("submit", async(e) => {
-            e.preventDefault();
-
-            btn.innerText = "Submitting...";
-            btn.disabled = true;
-
-            const data = Object.fromEntries(new FormData(form));
-
-            try {
-                const res = await fetch("/api/contact", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(data),
-                });
-
-                if (res.ok) {
-                    successMsg.classList.remove("hidden");
-                    form.reset();
-                }
-            } catch (err) {
-                alert("Something went wrong");
+      // ── Scroll Reveal ──
+      const revealEls = document.querySelectorAll(".reveal");
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+              io.unobserve(e.target);
             }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      revealEls.forEach((el) => io.observe(el));
 
-            btn.innerText = "Submit";
-            btn.disabled = false;
+      // ── Counter Animation ──
+      const counters = document.querySelectorAll(".counter");
+      const counterIO = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            const el = e.target;
+            const target = parseInt(el.dataset.target);
+            if (target === 0) {
+              el.textContent = "0";
+              counterIO.unobserve(el);
+              return;
+            }
+            let start = 0;
+            const duration = 1800;
+            const startTime = performance.now();
+            function update(now) {
+              const p = Math.min((now - startTime) / duration, 1);
+              const ease = 1 - Math.pow(1 - p, 3);
+              el.textContent = Math.round(ease * target);
+              if (p < 1) requestAnimationFrame(update);
+            }
+            requestAnimationFrame(update);
+            counterIO.unobserve(el);
+          });
+        },
+        { threshold: 0.5 }
+      );
+      counters.forEach((c) => counterIO.observe(c));
+
+      // ── Contact Form ──
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const btn = document.getElementById("submitBtn");
+          const txt = document.getElementById("btnText");
+          const arrow = document.getElementById("btnArrow");
+
+          // Validate
+          const name = this.querySelector("[name=name]").value.trim();
+          const email = this.querySelector("[name=email]").value.trim();
+          if (!name || !email) {
+            this.querySelector(
+              "[name=" + (!name ? "name" : "email") + "]"
+            ).style.borderColor = "rgba(200,75,49,0.8)";
+            return;
+          }
+
+          btn.classList.add("loading");
+          txt.textContent = "Submitting...";
+          arrow.innerHTML = `<circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="50" stroke-dashoffset="50" style="animation:spin 1s linear infinite;transform-origin:center"/>`;
+
+          setTimeout(() => {
+            this.style.display = "none";
+            document.getElementById("successMsg").style.display = "block";
+          }, 1800);
         });
-    </script>
-</body>
 
+      // ── Form field border reset on input ──
+      document.querySelectorAll(".form-field").forEach((f) => {
+        f.addEventListener("input", () => (f.style.borderColor = ""));
+      });
+    </script>
+
+    <style>
+      @keyframes spin {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+    </style>
+  </body>
 </html>
