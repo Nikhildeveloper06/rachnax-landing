@@ -4,6 +4,6 @@
     "outputDirectory": ".",
     "routes": [
         { "handle": "filesystem" },
-        { "src": "/.*", "dest": "/index.html" }
+        { "src": "^/(?!googlec6d3a2a25b4a0f78\\.html).*", "dest": "/index.html" }
     ]
 }
