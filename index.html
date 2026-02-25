@@ -8,138 +8,203 @@
     <title>RachnaX — India's Creator Recognition Platform</title>
 
     <meta name="description" content="RachnaX is India's first design recognition and creator community platform helping Tier 2/3 creators earn, showcase and get hired." />
-    <meta name="keywords" content="RachnaX, design awards India, creator platform India, hire designers India" />
     <link rel="canonical" href="https://www.rachnax.com" />
 
-    <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="/logo.png" />
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="RachnaX — India's Creator Recognition Platform" />
-    <meta property="og:description" content="Recognition. Earnings. Hiring. Built for Bharat's creators." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.rachnax.com" />
-    <meta property="og:image" content="https://www.rachnax.com/logo.png" />
-
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": "RachnaX",
-            "url": "https://www.rachnax.com",
-            "logo": "https://www.rachnax.com/logo.png",
-            "description": "India's first design recognition and creator community platform",
-            "sameAs": ["https://www.linkedin.com", "https://twitter.com"]
-        }
-    </script>
-
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .glow {
+            background: radial-gradient( circle at 50% 0%, rgba(124, 58, 237, 0.15), transparent 60%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+        
+        .glass {
+            backdrop-filter: blur(12px);
+            background: rgba(232, 233, 232, 0.7);
+        }
+    </style>
 </head>
 
 <body class="bg-[#e8e9e8] text-black antialiased">
-    <!-- ================= NAVBAR ================= -->
-    <header class="border-b border-gray-300 bg-[#e8e9e8]/80 backdrop-blur sticky top-0 z-50">
+    <!-- NAVBAR -->
+    <header class="glass sticky top-0 z-50 border-b border-gray-300">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Logo ONLY -->
-            <div class="flex items-center">
-                <img src="/logo.png" alt="RachnaX logo" class="h-8 w-auto object-contain" />
-            </div>
+            <img src="/logo.png" alt="RachnaX logo" class="h-8 w-auto" />
 
-            <!-- CTA -->
             <a href="#contact" class="bg-black text-white px-5 py-2 rounded-xl font-semibold hover:scale-105 transition">
           Join Waitlist
         </a>
         </div>
     </header>
 
-    <!-- ================= HERO ================= -->
-    <section class="max-w-7xl mx-auto px-6 py-24 text-center">
-        <h1 class="text-5xl md:text-6xl font-bold leading-tight">
-            India's First<br />
-            <span class="text-purple-700">Creator Recognition Platform</span>
-        </h1>
+    <!-- HERO -->
+    <section class="relative glow">
+        <div class="max-w-7xl mx-auto px-6 py-28 text-center">
+            <h1 class="text-5xl md:text-6xl font-bold leading-tight">
+                India's First<br />
+                <span class="text-purple-700">Creator Recognition Platform</span>
+            </h1>
 
-        <p class="mt-6 text-gray-700 max-w-2xl mx-auto text-lg">
-            Recognition. Earnings. Hiring — built for India's 10M+ emerging creators.
-        </p>
+            <p class="mt-6 text-gray-700 max-w-2xl mx-auto text-lg">
+                Recognition. Earnings. Hiring — built for India's 10M+ emerging creators.
+            </p>
 
-        <div class="mt-10 flex justify-center gap-4">
-            <a href="#contact" class="bg-purple-600 text-white px-8 py-4 rounded-2xl font-semibold hover:bg-purple-700 transition shadow-lg shadow-purple-600/20">
-          Get Early Access
-        </a>
+            <div class="mt-10 flex justify-center gap-4">
+                <a href="#contact" class="bg-purple-600 text-white px-8 py-4 rounded-2xl font-semibold hover:bg-purple-700 transition shadow-lg">
+            Get Early Access
+          </a>
+            </div>
         </div>
     </section>
 
-    <!-- ================= STATS ================= -->
-    <section class="max-w-6xl mx-auto px-6 py-16 grid md:grid-cols-3 gap-8 text-center">
-        <div class="p-6 border border-gray-300 rounded-2xl bg-white hover:shadow-lg transition">
-            <h3 class="text-3xl font-bold">$7B+</h3>
-            <p class="text-gray-600 mt-2">India Design Market</p>
+    <!-- STATS -->
+    <section class="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-3 gap-8 text-center">
+        <div class="card-hover p-8 bg-white border border-gray-200 rounded-2xl">
+            <h3 class="text-4xl font-bold counter" data-target="7">0</h3>
+            <p class="text-gray-600 mt-2">Billion+ Market</p>
         </div>
 
-        <div class="p-6 border border-gray-300 rounded-2xl bg-white hover:shadow-lg transition">
-            <h3 class="text-3xl font-bold">10M+</h3>
-            <p class="text-gray-600 mt-2">Target Creators</p>
+        <div class="card-hover p-8 bg-white border border-gray-200 rounded-2xl">
+            <h3 class="text-4xl font-bold counter" data-target="10">0</h3>
+            <p class="text-gray-600 mt-2">Million+ Creators</p>
         </div>
 
-        <div class="p-6 border border-gray-300 rounded-2xl bg-white hover:shadow-lg transition">
-            <h3 class="text-3xl font-bold">0</h3>
+        <div class="card-hover p-8 bg-white border border-gray-200 rounded-2xl">
+            <h3 class="text-4xl font-bold">0</h3>
             <p class="text-gray-600 mt-2">India-First Competitors</p>
         </div>
     </section>
 
-    <!-- ================= FEATURES ================= -->
+    <!-- FEATURES -->
     <section class="max-w-7xl mx-auto px-6 py-24">
         <h2 class="text-4xl font-bold text-center mb-16">Why RachnaX Wins</h2>
 
         <div class="grid md:grid-cols-3 gap-8">
-            <div class="p-6 border border-gray-300 rounded-2xl bg-white hover:shadow-lg transition">
-                <h3 class="text-xl font-semibold">🏆 Recognition Engine</h3>
-                <p class="text-gray-600 mt-3">
+            <div class="card-hover p-8 bg-white border border-gray-200 rounded-2xl">
+                <h3 class="text-xl font-semibold mb-3">🏆 Recognition Engine</h3>
+                <p class="text-gray-600">
                     India's first live design awards ecosystem for emerging creators.
                 </p>
             </div>
 
-            <div class="p-6 border border-gray-300 rounded-2xl bg-white hover:shadow-lg transition">
-                <h3 class="text-xl font-semibold">💰 Creator Earnings</h3>
-                <p class="text-gray-600 mt-3">
+            <div class="card-hover p-8 bg-white border border-gray-200 rounded-2xl">
+                <h3 class="text-xl font-semibold mb-3">💰 Creator Earnings</h3>
+                <p class="text-gray-600">
                     Vote revenue, prizes, and marketplace income streams.
                 </p>
             </div>
 
-            <div class="p-6 border border-gray-300 rounded-2xl bg-white hover:shadow-lg transition">
-                <h3 class="text-xl font-semibold">🚀 InstaHire</h3>
-                <p class="text-gray-600 mt-3">
+            <div class="card-hover p-8 bg-white border border-gray-200 rounded-2xl">
+                <h3 class="text-xl font-semibold mb-3">🚀 InstaHire</h3>
+                <p class="text-gray-600">
                     Recruiters hire directly from verified performance data.
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- ================= CONTACT ================= -->
+    <!-- CONTACT -->
     <section id="contact" class="max-w-xl mx-auto px-6 py-24">
-        <h2 class="text-3xl font-bold text-center mb-8">Join the Waitlist</h2>
+        <div class="bg-white border border-gray-200 rounded-3xl p-10 shadow-sm">
+            <h2 class="text-3xl font-bold text-center mb-8">Join the Waitlist</h2>
 
-        <form id="contactForm" class="space-y-4">
-            <input name="name" placeholder="Your name" class="w-full p-4 rounded-xl bg-white border border-gray-300 focus:border-purple-500 outline-none" required />
+            <form id="contactForm" class="space-y-4">
+                <input name="name" placeholder="Your name" class="w-full p-4 rounded-xl bg-gray-50 border border-gray-300 focus:border-purple-500 outline-none" required />
 
-            <input name="email" type="email" placeholder="Email" class="w-full p-4 rounded-xl bg-white border border-gray-300 focus:border-purple-500 outline-none" required />
+                <input name="email" type="email" placeholder="Email" class="w-full p-4 rounded-xl bg-gray-50 border border-gray-300 focus:border-purple-500 outline-none" required />
 
-            <textarea name="message" placeholder="Message" class="w-full p-4 rounded-xl bg-white border border-gray-300 focus:border-purple-500 outline-none"></textarea>
+                <textarea name="message" placeholder="Message" class="w-full p-4 rounded-xl bg-gray-50 border border-gray-300 focus:border-purple-500 outline-none"></textarea>
 
-            <button class="w-full bg-purple-600 text-white py-4 rounded-xl font-semibold hover:bg-purple-700 transition">
-          Submit
-        </button>
-        </form>
+                <button id="submitBtn" class="w-full bg-purple-600 text-white py-4 rounded-xl font-semibold hover:bg-purple-700 transition">
+            Submit
+          </button>
+            </form>
 
-        <p id="successMsg" class="hidden text-green-600 mt-4 text-center">
-            ✅ Submitted successfully
-        </p>
+            <p id="successMsg" class="hidden text-green-600 mt-4 text-center font-medium">
+                ✅ Submitted successfully
+            </p>
+        </div>
     </section>
 
+    <!-- FOOTER -->
+    <footer class="text-center py-10 text-gray-600">
+        © 2025 RachnaX. Built for Bharat's Creators.
+    </footer>
+
     <script src="/script.js"></script>
+
+    <script>
+        // ===== Animated Counters =====
+        const counters = document.querySelectorAll(".counter");
+
+        counters.forEach((counter) => {
+            const target = +counter.getAttribute("data-target");
+            let count = 0;
+
+            const update = () => {
+                const increment = target / 60;
+                count += increment;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count);
+                    requestAnimationFrame(update);
+                } else {
+                    counter.innerText = target + "+";
+                }
+            };
+
+            update();
+        });
+
+        // ===== Form UX =====
+        const form = document.getElementById("contactForm");
+        const btn = document.getElementById("submitBtn");
+        const successMsg = document.getElementById("successMsg");
+
+        form.addEventListener("submit", async(e) => {
+            e.preventDefault();
+
+            btn.innerText = "Submitting...";
+            btn.disabled = true;
+
+            const data = Object.fromEntries(new FormData(form));
+
+            try {
+                const res = await fetch("/api/contact", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (res.ok) {
+                    successMsg.classList.remove("hidden");
+                    form.reset();
+                }
+            } catch (err) {
+                alert("Something went wrong");
+            }
+
+            btn.innerText = "Submit";
+            btn.disabled = false;
+        });
+    </script>
 </body>
 
 </html>
